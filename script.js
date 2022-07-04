@@ -1,4 +1,4 @@
-//12 - Criar cores para a paleta:
+//12 - Criar cores aleatórias para a paleta:
 
 window.onload = function () {
   const recebeCor = document.getElementsByClassName('cor-aleatoria');
@@ -12,3 +12,10 @@ window.onload = function () {
     recebeCor[i].style.backgroundColor = corGerada;
   }
 };
+
+// Criar  os quadrados:
+
+const quadrados = document.getElementById('pixel-board').children;
+for (let index = 0; index < quadrados.length; index += 1) {
+  quadrados[index].className = 'pixel';
+}
