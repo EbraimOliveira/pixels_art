@@ -1,29 +1,28 @@
 #title {
-  margin-left: 80px;
+  text-align: center;
 }
 
 #color-palette {
   color: white;
 }
+
+/* #remendo {
+  border: 2px solid red;
+  position: absolute;
+  margin-left: 150px;
+  margin-top: 50px;
+  background-color: blue;
+  border-width: 150px;
+} */
 .color {
-  width: 70px;
-  height: 70px;
+  width: 40px;
+  height: 40px;
   display: inline-block;
   margin-right: 20px;
   border: 1px solid black;
-  border-radius: 50%;
 }
 
-.black {
+#black {
   background-color: black;
-}
-.color-one {
-  background-color: yellow;
-}
-
-.color-two {
-  background-color: rgb(108, 39, 99);
-}
-.color-three {
-  background-color: rgb(55, 222, 107);
+  margin-left: 510px;
 }
