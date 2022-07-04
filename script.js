@@ -1,7 +1,8 @@
-//12 - Criar cores aleatórias para a paleta:
+// Criar cores aleatórias para a paleta:
+
+const recebeCor = document.getElementsByClassName('cor-aleatoria');
 
 window.onload = function () {
-  const recebeCor = document.getElementsByClassName('cor-aleatoria');
   for (let i = 0; i < recebeCor.length; i += 1) {
     const caracteresGeradores = '0123456789ABCDEF';
     let corGerada = '#';
@@ -15,7 +16,26 @@ window.onload = function () {
 
 // Criar  os quadrados:
 
-const quadrados = document.getElementById('pixel-board').children;
-for (let index = 0; index < quadrados.length; index += 1) {
-  quadrados[index].className = 'pixel';
+function criaQuadrados() {
+  const quadrados = document.getElementById('pixel-board').children;
+  for (let index = 0; index < quadrados.length; index += 1) {
+    quadrados[index].className = 'pixel';
+  }
 }
+criaQuadrados();
+
+// Seleciona as cores:
+
+const paletaDeCores = document.getElementsByClassName('color');
+function selecionaCores() {
+  for (let index = 0; index < paletaDeCores.length; index += 1) {
+    paletaDeCores[index].addEventListener('click', function () {
+      if (paletaDeCores[index].classList.contains('seleciona') === false) {
+        paletaDeCores[index].classList.add('seleciona');
+      } else {
+        paletaDeCores[index].classList.remove('seleciona');
+      }
+    });
+  }
+}
+selecionaCores();
