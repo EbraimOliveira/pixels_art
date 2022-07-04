@@ -1,0 +1,25 @@
+#title {
+  margin-left: 60px;
+}
+.color {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  margin-right: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.black {
+  background-color: black;
+}
+.color-one {
+  background-color: yellow;
+}
+
+.color-two {
+  background-color: rgb(108, 39, 99);
+}
+.color-three {
+  background-color: rgb(55, 222, 107);
+}
