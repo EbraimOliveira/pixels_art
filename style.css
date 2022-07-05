@@ -12,11 +12,16 @@
   margin-left: 510px;
   margin-top: 40px;
 }
+#board-size {
+  margin-top: 80px;
+  margin-left: 480px;
+  border: 1px solid black;
+}
 
 #clear-board {
   border: 1px solid black;
   text-align: center;
-  margin-left: 600px;
+  margin-left: 60px;
   margin-top: 50px;
 }
 

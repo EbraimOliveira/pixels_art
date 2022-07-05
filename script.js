@@ -44,8 +44,6 @@ function selecionaCores() {
             paletaDeCores[index2].classList.remove('selected');
           }
         }
-      } else {
-        paletaDeCores[index].classList.remove('selected');
       }
     });
   }
