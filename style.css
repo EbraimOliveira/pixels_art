@@ -19,6 +19,7 @@
   margin-left: 600px;
   margin-top: 50px;
 }
+
 .color {
   width: 40px;
   height: 40px;
@@ -29,10 +30,6 @@
   border-radius: 50%;
 }
 
-#black {
-  background-color: black;
-  margin-left: 510px;
-}
 .pixel {
   background-color: white;
   width: 40px;
@@ -41,4 +38,7 @@
   margin-right: 1px;
   margin-left: 1px;
   border: 1px solid black;
+}
+.black {
+  margin-left: 510px;
 }
