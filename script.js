@@ -1,5 +1,3 @@
-document.getElementById('black').classList.add('selected');
-
 // Criar cores aleatórias para a paleta:
 
 const recebeCor = document.getElementsByClassName('cor-aleatoria');
@@ -53,3 +51,13 @@ for (let index = 0; index < quadradosBrancos.length; index += 1) {
     evento.target.style.backgroundColor = corSelecionada.style.backgroundColor;
   });
 }
+
+// Botão:
+
+function limpaOsQuadros() {
+  for (let i = 0; i < quadradosBrancos.length; i += 1) {
+    quadradosBrancos[i].style.backgroundColor = 'white';
+  }
+}
+const botaoClear = document.getElementById('clear-board');
+botaoClear.addEventListener('click', limpaOsQuadros);
