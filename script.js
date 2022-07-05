@@ -27,6 +27,7 @@ criaQuadrados();
 // Seleciona as cores:
 
 const paletaDeCores = document.getElementsByClassName('color');
+
 function selecionaCores() {
   for (let index = 0; index < paletaDeCores.length; index += 1) {
     paletaDeCores[index].addEventListener('click', function () {
@@ -39,3 +40,14 @@ function selecionaCores() {
   }
 }
 selecionaCores();
+
+// Aplica as cores:
+
+const quadradosBrancos = document.getElementsByClassName('pixel');
+
+for (let index = 0; index < quadradosBrancos.length; index += 1) {
+  quadradosBrancos[index].addEventListener('click', function (evento) {
+    const corSelecionada = document.querySelector('.seleciona');
+    evento.target.style.backgroundColor = corSelecionada.style.backgroundColor;
+  });
+}
