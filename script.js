@@ -1,3 +1,5 @@
+document.getElementById('black').classList.add('selected');
+
 // Criar cores aleatórias para a paleta:
 
 const recebeCor = document.getElementsByClassName('cor-aleatoria');
@@ -31,10 +33,10 @@ const paletaDeCores = document.getElementsByClassName('color');
 function selecionaCores() {
   for (let index = 0; index < paletaDeCores.length; index += 1) {
     paletaDeCores[index].addEventListener('click', function () {
-      if (paletaDeCores[index].classList.contains('seleciona') === false) {
-        paletaDeCores[index].classList.add('seleciona');
+      if (paletaDeCores[index].classList.contains('selected') === false) {
+        paletaDeCores[index].classList.add('selected');
       } else {
-        paletaDeCores[index].classList.remove('seleciona');
+        paletaDeCores[index].classList.remove('selected');
       }
     });
   }
@@ -47,7 +49,7 @@ const quadradosBrancos = document.getElementsByClassName('pixel');
 
 for (let index = 0; index < quadradosBrancos.length; index += 1) {
   quadradosBrancos[index].addEventListener('click', function (evento) {
-    const corSelecionada = document.querySelector('.seleciona');
+    const corSelecionada = document.querySelector('.selected');
     evento.target.style.backgroundColor = corSelecionada.style.backgroundColor;
   });
 }
