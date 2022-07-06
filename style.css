@@ -8,21 +8,25 @@
 
 #pixel-board {
   position: absolute;
-  width: 260px;
-  margin-left: 510px;
+  /* width: 260px; */
+  margin-left: 515px;
   margin-top: 40px;
 }
 #board-size {
   margin-top: 80px;
-  margin-left: 480px;
+  margin-left: 515px;
   border: 1px solid black;
+  width: 60px;
 }
 
 #clear-board {
   border: 1px solid black;
   text-align: center;
-  margin-left: 60px;
+  margin-left: 50px;
   margin-top: 50px;
+}
+#generate-board {
+  border: 1px solid black;
 }
 
 .color {
