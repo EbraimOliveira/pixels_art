@@ -78,15 +78,24 @@ botaoClear.addEventListener('click', limpaOsQuadros);
 
 // IMPUT PARA MUDAR O QUADRO DE PIXELS:
 
-const botaoMudaTamanho = document.getElementById('board-size');
+//Primeiro é preciso apagar o quadro anterior senão o novo valor atribuido  no input apenas soma e ao que já existe:
 
-botaoMudaTamanho.addEventListener('click', function () {
-  let novoQuadro = input.value;
-
-  if (novoQuadro === 0) {
-    alert('Board inválido!');
+function apagaQuadradoAnterior() {
+  while (quadradoDePixels.hasChildNodes()) {
+    // O método hasChildNodes() retorna um valor booleano indicando se o Node fornecido possui nodes filhos ou não.
+    quadradoDePixels.removeChild(quadradoDePixels.lastChild);
   }
-  if (novoQuadro < 5) {
+}
+
+const botaoMudaTamanho = document.getElementById('generate-board');
+const valorDoInput = document.getElementById('board-size');
+botaoMudaTamanho.addEventListener('click', function () {
+  apagaQuadradoAnterior();
+  let novoQuadro = valorDoInput.value;
+  console.log(novoQuadro);
+  if (novoQuadro === '') {
+    alert('Board inválido!');
+  } else if (novoQuadro < 5) {
     novoQuadro = 5;
   }
   if (novoQuadro > 50) {
