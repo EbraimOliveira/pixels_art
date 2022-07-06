@@ -76,12 +76,22 @@ function limpaOsQuadros() {
 const botaoClear = document.getElementById('clear-board');
 botaoClear.addEventListener('click', limpaOsQuadros);
 
-//Cria Imput:
+// IMPUT PARA MUDAR O QUADRO DE PIXELS:
 
-// const vQvButton = document.getElementById('generate-board');
-// vQvButton.addEventListener('keypress', function (e) {
-//   if (caixinhaDeCompromissos.value === '') {
-//     alert('Board inválido!');
-//   } else {
-//   }
-// });
+const botaoMudaTamanho = document.getElementById('board-size');
+
+botaoMudaTamanho.addEventListener('click', function () {
+  let novoQuadro = input.value;
+
+  if (novoQuadro === 0) {
+    alert('Board inválido!');
+  }
+  if (novoQuadro < 5) {
+    novoQuadro = 5;
+  }
+  if (novoQuadro > 50) {
+    novoQuadro = 50;
+  }
+
+  criaPixels(novoQuadro);
+});
