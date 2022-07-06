@@ -14,21 +14,37 @@ window.onload = function () {
   }
 };
 
-// CRIA OS PIXELS:
+// CRIA OS PIXELS, APLICA AS CORES AOS PIXELS & BOTÃO 'LIMPAR' :
 
 const quadradoDePixels = document.getElementById('pixel-board');
 function criaPixels(n) {
   for (let index = 0; index < n * n; index += 1) {
     //  Criar os elementos uma quantidade de vezes igual a n * n tem  o mesmo efeito que usar dois laços FOR nesse caso, mas é melhor pois diminui o código.
     // for (let index2 = 0; index2 < n; index2 += 1) {
-
-    const pixels = document.createElement('div'); //cria o pixel (quadradinho que receberá a cor).
-    pixels.classList.add('pixel'); //adiciona o style apropriado.
+    const pixels = document.createElement('div'); // cria o pixel.
+    pixels.classList.add('pixel'); // adiciona o style apropriado.
     const larguraDoQuadrado = 44 * n; // 44 é o tamanho de cada pixel (width + margin + border)
-    quadradoDePixels.style.width = `${larguraDoQuadrado}px`; //define o tamanho do quadradoDePixels de forma dinâmica, para mudar de acordo com a aquantidade de elementos.
+    quadradoDePixels.style.width = `${larguraDoQuadrado}px`; // define o tamanho do quadradoDePixels de forma dinâmica, para mudar de acordo com a aquantidade de elementos.
     quadradoDePixels.appendChild(pixels);
     // }
   }
+  const quadradosBrancos = document.getElementsByClassName('pixel');
+  console.log(quadradosBrancos);
+  for (let index = 0; index < quadradosBrancos.length; index += 1) {
+    quadradosBrancos[index].addEventListener('click', function (evento) {
+      const corSelecionada = document.getElementsByClassName('selected')[0];
+      evento.target.style.backgroundColor =
+        corSelecionada.style.backgroundColor;
+    });
+  }
+
+  function limpaOsQuadros() {
+    for (let i = 0; i < quadradosBrancos.length; i += 1) {
+      quadradosBrancos[i].style.backgroundColor = 'rgb(255, 255, 255)';
+    }
+  }
+  const botaoClear = document.getElementById('clear-board');
+  botaoClear.addEventListener('click', limpaOsQuadros);
 }
 criaPixels(5);
 
@@ -55,19 +71,6 @@ for (let index = 0; index < paletaDeCores.length; index += 1) {
   });
 }
 
-// APLICA AS CORES AOS PIXELS :
-
-const quadradosBrancos = document.getElementsByClassName('pixel');
-
-for (let index = 0; index < quadradosBrancos.length; index += 1) {
-  quadradosBrancos[index].addEventListener('click', function (evento) {
-    const corSelecionada = document.getElementsByClassName('selected')[0];
-    evento.target.style.backgroundColor = corSelecionada.style.backgroundColor;
-  });
-}
-
-// BOTÃO 'LIMPAR' :
-
 function limpaOsQuadros() {
   for (let i = 0; i < quadradosBrancos.length; i += 1) {
     quadradosBrancos[i].style.backgroundColor = 'rgb(255, 255, 255)';
@@ -78,7 +81,7 @@ botaoClear.addEventListener('click', limpaOsQuadros);
 
 // IMPUT PARA MUDAR O QUADRO DE PIXELS:
 
-//Primeiro é preciso apagar o quadro anterior senão o novo valor atribuido  no input apenas soma e ao que já existe:
+//É preciso apagar o quadro anterior senão o novo valor atribuido no input apenas soma ao que já existe:
 
 function apagaQuadradoAnterior() {
   while (quadradoDePixels.hasChildNodes()) {
@@ -92,7 +95,7 @@ const valorDoInput = document.getElementById('board-size');
 botaoMudaTamanho.addEventListener('click', function () {
   apagaQuadradoAnterior();
   let novoQuadro = valorDoInput.value;
-  console.log(novoQuadro);
+
   if (novoQuadro === '') {
     alert('Board inválido!');
   } else if (novoQuadro < 5) {
