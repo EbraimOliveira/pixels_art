@@ -28,23 +28,6 @@ function criaPixels(n) {
     quadradoDePixels.appendChild(pixels);
     // }
   }
-  const quadradosBrancos = document.getElementsByClassName('pixel');
-  console.log(quadradosBrancos);
-  for (let index = 0; index < quadradosBrancos.length; index += 1) {
-    quadradosBrancos[index].addEventListener('click', function (evento) {
-      const corSelecionada = document.getElementsByClassName('selected')[0];
-      evento.target.style.backgroundColor =
-        corSelecionada.style.backgroundColor;
-    });
-  }
-
-  function limpaOsQuadros() {
-    for (let i = 0; i < quadradosBrancos.length; i += 1) {
-      quadradosBrancos[i].style.backgroundColor = 'rgb(255, 255, 255)';
-    }
-  }
-  const botaoClear = document.getElementById('clear-board');
-  botaoClear.addEventListener('click', limpaOsQuadros);
 }
 criaPixels(5);
 
@@ -56,7 +39,7 @@ corPreta.classList.add('selected');
 const paletaDeCores = document.getElementsByClassName('color');
 
 for (let index = 0; index < paletaDeCores.length; index += 1) {
-  paletaDeCores[index].addEventListener('click', function () {
+  paletaDeCores[index].addEventListener('click', () => {
     if (paletaDeCores[index].classList.contains('selected') === false) {
       paletaDeCores[index].classList.add('selected');
       for (let index2 = 0; index2 < paletaDeCores.length; index2 += 1) {
@@ -71,6 +54,17 @@ for (let index = 0; index < paletaDeCores.length; index += 1) {
   });
 }
 
+// APLICA AS CORES AOS PIXELS:
+
+quadradoDePixels.addEventListener('click', (e) => {
+  const corSelecionada = document.getElementsByClassName('selected')[0];
+  if (e.target !== document.getElementById('pixel-board')) {
+    e.target.style.backgroundColor = corSelecionada.style.backgroundColor;
+  }
+});
+
+// LIMPA OS PIXELS
+
 function limpaOsQuadros() {
   for (let i = 0; i < quadradosBrancos.length; i += 1) {
     quadradosBrancos[i].style.backgroundColor = 'rgb(255, 255, 255)';
@@ -81,7 +75,7 @@ botaoClear.addEventListener('click', limpaOsQuadros);
 
 // IMPUT PARA MUDAR O QUADRO DE PIXELS:
 
-//É preciso apagar o quadro anterior senão o novo valor atribuido no input apenas soma ao que já existe:
+// É preciso apagar o quadro anterior senão o novo valor atribuido no input apenas soma ao que já existe:
 
 function apagaQuadradoAnterior() {
   while (quadradoDePixels.hasChildNodes()) {
@@ -92,7 +86,7 @@ function apagaQuadradoAnterior() {
 
 const botaoMudaTamanho = document.getElementById('generate-board');
 const valorDoInput = document.getElementById('board-size');
-botaoMudaTamanho.addEventListener('click', function () {
+botaoMudaTamanho.addEventListener('click', () => {
   apagaQuadradoAnterior();
   let novoQuadro = valorDoInput.value;
 
