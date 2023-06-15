@@ -1,62 +1,53 @@
-// CRIA CORES ALEATÓRIAS PARA A PALETA:
+const colorPalette = document.getElementsByClassName('color');
+const blackColorPalette = document.getElementsByClassName('black')[0];
+const randomColorPalette = document.getElementsByClassName('cor-aleatoria');
+const pixelBoard = document.getElementById('pixel-board');
 
-const recebeCor = document.getElementsByClassName('cor-aleatoria');
+window.onload = function createPallete() {
+  Array.from(randomColorPalette).forEach((color) => {
+    const newColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    color.style.backgroundColor = newColor;
+  });
+};
 
-window.onload = function () {
-  for (let i = 0; i < recebeCor.length; i += 1) {
-    const caracteresGeradores = '0123456789ABCDEF';
-    let corGerada = '#';
-    for (let index = 0; index < 6; index += 1) {
-      corGerada += caracteresGeradores[Math.floor(Math.random() * 16)];
-    }
+const selectBlackColor = () => {
+  blackColorPalette.style.backgroundColor = 'black';
+  blackColorPalette.classList.add('selected');
+};
+selectBlackColor();
 
-    recebeCor[i].style.backgroundColor = corGerada;
+const createPixels = (n) => {
+  for (let i = 0; i < n * n; i += 1) {
+    const pixels = document.createElement('div');
+    pixels.classList.add('pixel');
+    const boardWidth = 44 * n; // 44 é o tamanho de cada pixel (width + margin + border)
+    pixelBoard.style.width = `${boardWidth}px`;
+    pixelBoard.appendChild(pixels);
+  }
+};
+createPixels(5);
+
+const changeColor = (i) => {
+  if (!colorPalette[i].classList.contains('selected')) {
+    colorPalette[i].classList.add('selected');
+
+    Array.from(colorPalette).forEach((color) => {
+      if (color !== colorPalette[i] && color.classList.contains('selected')) {
+        color.classList.remove('selected');
+      }
+    });
   }
 };
 
-// CRIA OS PIXELS, APLICA AS CORES AOS PIXELS & BOTÃO 'LIMPAR' :
-
-const quadradoDePixels = document.getElementById('pixel-board');
-function criaPixels(n) {
-  for (let index = 0; index < n * n; index += 1) {
-    //  Criar os elementos uma quantidade de vezes igual a n * n tem  o mesmo efeito que usar dois laços FOR nesse caso, mas é melhor pois diminui o código.
-    // for (let index2 = 0; index2 < n; index2 += 1) {
-    const pixels = document.createElement('div'); // cria o pixel.
-    pixels.classList.add('pixel'); // adiciona o style apropriado.
-    const larguraDoQuadrado = 44 * n; // 44 é o tamanho de cada pixel (width + margin + border)
-    quadradoDePixels.style.width = `${larguraDoQuadrado}px`; // define o tamanho do quadradoDePixels de forma dinâmica, para mudar de acordo com a aquantidade de elementos.
-    quadradoDePixels.appendChild(pixels);
-    // }
-  }
-}
-criaPixels(5);
-
-// SSELECIONA AS CORES NA PALETA:
-
-const corPreta = document.getElementsByClassName('black')[0];
-corPreta.style.backgroundColor = ' black';
-corPreta.classList.add('selected');
-const paletaDeCores = document.getElementsByClassName('color');
-
-for (let index = 0; index < paletaDeCores.length; index += 1) {
-  paletaDeCores[index].addEventListener('click', () => {
-    if (paletaDeCores[index].classList.contains('selected') === false) {
-      paletaDeCores[index].classList.add('selected');
-      for (let index2 = 0; index2 < paletaDeCores.length; index2 += 1) {
-        if (
-          paletaDeCores[index2] !== paletaDeCores[index] &&
-          paletaDeCores[index2].classList.contains('selected') === true
-        ) {
-          paletaDeCores[index2].classList.remove('selected');
-        }
-      }
-    }
+Array.from(colorPalette).forEach((color, i) => {
+  color.addEventListener('click', () => {
+    changeColor(i);
   });
-}
+});
 
 // APLICA AS CORES AOS PIXELS:
 
-quadradoDePixels.addEventListener('click', (e) => {
+pixelBoard.addEventListener('click', (e) => {
   const corSelecionada = document.getElementsByClassName('selected')[0];
   if (e.target !== document.getElementById('pixel-board')) {
     e.target.style.backgroundColor = corSelecionada.style.backgroundColor;
@@ -78,9 +69,9 @@ botaoClear.addEventListener('click', limpaOsQuadros);
 // É preciso apagar o quadro anterior senão o novo valor atribuido no input apenas soma ao que já existe:
 
 function apagaQuadradoAnterior() {
-  while (quadradoDePixels.hasChildNodes()) {
+  while (pixelBoard.hasChildNodes()) {
     // O método hasChildNodes() retorna um valor booleano indicando se o Node fornecido possui nodes filhos ou não.
-    quadradoDePixels.removeChild(quadradoDePixels.lastChild);
+    pixelBoard.removeChild(pixelBoard.lastChild);
   }
 }
 
