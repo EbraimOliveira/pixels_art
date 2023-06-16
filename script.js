@@ -2,6 +2,7 @@ const colorPalette = document.getElementsByClassName('color');
 const blackColorPalette = document.getElementsByClassName('black')[0];
 const randomColorPalette = document.getElementsByClassName('cor-aleatoria');
 const pixelBoard = document.getElementById('pixel-board');
+const clearButton = document.getElementById('clear-board');
 
 window.onload = function createPallete() {
   Array.from(randomColorPalette).forEach((color) => {
@@ -27,42 +28,49 @@ const createPixels = (n) => {
 };
 createPixels(5);
 
-const changeColor = (i) => {
-  if (!colorPalette[i].classList.contains('selected')) {
-    colorPalette[i].classList.add('selected');
+const removeSelected = (color) => {
+  Array.from(colorPalette).forEach((color2) => {
+    if (color2 !== color && color2.classList.contains('selected')) {
+      color2.classList.remove('selected');
+    }
+  });
+};
 
-    Array.from(colorPalette).forEach((color) => {
-      if (color !== colorPalette[i] && color.classList.contains('selected')) {
-        color.classList.remove('selected');
-      }
-    });
+const addSelected = (color) => {
+  if (!color.classList.contains('selected')) {
+    color.classList.add('selected');
+    removeSelected(color);
   }
 };
 
-Array.from(colorPalette).forEach((color, i) => {
-  color.addEventListener('click', () => {
-    changeColor(i);
+const selectColor = () => {
+  Array.from(colorPalette).forEach((color) => {
+    color.addEventListener('click', () => {
+      addSelected(color);
+    });
   });
-});
+};
+selectColor();
 
-// APLICA AS CORES AOS PIXELS:
+const applyColor = () => {
+  pixelBoard.addEventListener('click', (e) => {
+    const selectedColor = document.getElementsByClassName('selected')[0];
+    if (e.target !== document.getElementById('pixel-board')) {
+      e.target.style.backgroundColor = selectedColor.style.backgroundColor;
+    }
+  });
+};
+applyColor();
 
-pixelBoard.addEventListener('click', (e) => {
-  const corSelecionada = document.getElementsByClassName('selected')[0];
-  if (e.target !== document.getElementById('pixel-board')) {
-    e.target.style.backgroundColor = corSelecionada.style.backgroundColor;
-  }
-});
-
-// LIMPA OS PIXELS
-
-function limpaOsQuadros() {
-  for (let i = 0; i < quadradosBrancos.length; i += 1) {
-    quadradosBrancos[i].style.backgroundColor = 'rgb(255, 255, 255)';
-  }
-}
-const botaoClear = document.getElementById('clear-board');
-botaoClear.addEventListener('click', limpaOsQuadros);
+const clearBoard = () => {
+  clearButton.addEventListener('click', () => {
+    const pixels = document.querySelectorAll('.pixel');
+    Array.from(pixels).forEach((pixel) => {
+      pixel.style.backgroundColor = '#fff';
+    });
+  });
+};
+clearBoard();
 
 // IMPUT PARA MUDAR O QUADRO DE PIXELS:
 
@@ -70,7 +78,6 @@ botaoClear.addEventListener('click', limpaOsQuadros);
 
 function apagaQuadradoAnterior() {
   while (pixelBoard.hasChildNodes()) {
-    // O método hasChildNodes() retorna um valor booleano indicando se o Node fornecido possui nodes filhos ou não.
     pixelBoard.removeChild(pixelBoard.lastChild);
   }
 }
@@ -90,5 +97,5 @@ botaoMudaTamanho.addEventListener('click', () => {
     novoQuadro = 50;
   }
 
-  criaPixels(novoQuadro);
+  createPixels(novoQuadro);
 });

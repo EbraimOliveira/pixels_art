@@ -3,7 +3,7 @@ padding:0;
 margin:0;
 vertical-align:baseline;
 list-style:none;
-border:0
+border:0;
 }
 
 #body {
@@ -29,27 +29,35 @@ border:0
   text-align: center;
 }
 
+#menu {
+  padding: 50px 50px 30px 50px;
+}
+
 #pixel-board {
   display: flexbox;
+  padding: auto;
   margin: auto;
 }
 
 #board-size {
-  margin-top: 80px;
-  margin-left: 515px;
+  text-align: center;
   border: 1px solid black;
+  padding: 1px 5px 1px 5px;
+  border-radius: 5px;
   width: 60px;
 }
 
 #clear-board {
-  border: 1px solid black;
   text-align: center;
-  margin-left: 50px;
-  margin-top: 50px;
+  border: 1px solid black;
+  padding: 1px 5px 1px 5px;
+  border-radius: 5px;
 }
 
 #generate-board {
   border: 1px solid black;
+  padding: 1px 5px 1px 5px;
+  border-radius: 5px;
 }
 
 .color {
