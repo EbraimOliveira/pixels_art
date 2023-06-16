@@ -3,6 +3,7 @@ const blackColorPalette = document.getElementsByClassName('black')[0];
 const randomColorPalette = document.getElementsByClassName('cor-aleatoria');
 const pixelBoard = document.getElementById('pixel-board');
 const clearButton = document.getElementById('clear-board');
+const generateBoardBtn = document.getElementById('generate-board');
 
 window.onload = function createPallete() {
   Array.from(randomColorPalette).forEach((color) => {
@@ -72,20 +73,15 @@ const clearBoard = () => {
 };
 clearBoard();
 
-// IMPUT PARA MUDAR O QUADRO DE PIXELS:
-
-// É preciso apagar o quadro anterior senão o novo valor atribuido no input apenas soma ao que já existe:
-
-function apagaQuadradoAnterior() {
+const clearPixelBoard = () => {
   while (pixelBoard.hasChildNodes()) {
     pixelBoard.removeChild(pixelBoard.lastChild);
   }
-}
+};
 
-const botaoMudaTamanho = document.getElementById('generate-board');
 const valorDoInput = document.getElementById('board-size');
-botaoMudaTamanho.addEventListener('click', () => {
-  apagaQuadradoAnterior();
+generateBoardBtn.addEventListener('click', () => {
+  clearPixelBoard();
   let novoQuadro = valorDoInput.value;
 
   if (novoQuadro === '') {
