@@ -4,13 +4,18 @@ const randomColorPalette = document.getElementsByClassName('cor-aleatoria');
 const pixelBoard = document.getElementById('pixel-board');
 const clearButton = document.getElementById('clear-board');
 const generateBoardBtn = document.getElementById('generate-board');
+const boardSize = document.getElementById('board-size');
+const inputWrapper = document.querySelector('.input-wrapper');
+const hoverDescription = inputWrapper.querySelector('.description');
+const refreshColorsBtn = document.getElementById('refresh-colors');
 
-window.onload = function createPallete() {
+const createPallete = () => {
   Array.from(randomColorPalette).forEach((color) => {
     const newColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
     color.style.backgroundColor = newColor;
   });
 };
+createPallete();
 
 const selectBlackColor = () => {
   blackColorPalette.style.backgroundColor = 'black';
@@ -19,10 +24,11 @@ const selectBlackColor = () => {
 selectBlackColor();
 
 const createPixels = (n) => {
+
   for (let i = 0; i < n * n; i += 1) {
     const pixels = document.createElement('div');
     pixels.classList.add('pixel');
-    const boardWidth = 44 * n; // 44 é o tamanho de cada pixel (width + margin + border)
+    const boardWidth = 44 * n;
     pixelBoard.style.width = `${boardWidth}px`;
     pixelBoard.appendChild(pixels);
   }
@@ -73,25 +79,54 @@ const clearBoard = () => {
 };
 clearBoard();
 
+const clearPixel = () => {
+  const pixels = document.querySelectorAll('.pixel');
+  Array.from(pixels).forEach((pixel) => {
+    pixel.addEventListener('dblclick', (e) => {
+      e.target.style.backgroundColor = '#fff';
+    });
+  });
+};
+clearPixel();
+
 const clearPixelBoard = () => {
   while (pixelBoard.hasChildNodes()) {
     pixelBoard.removeChild(pixelBoard.lastChild);
   }
 };
 
-const valorDoInput = document.getElementById('board-size');
-generateBoardBtn.addEventListener('click', () => {
-  clearPixelBoard();
-  let novoQuadro = valorDoInput.value;
+const newPixelBoard = () => {
+  generateBoardBtn.addEventListener('click', () => {
+    clearPixelBoard();
+    let newBoard = boardSize.value;
 
-  if (novoQuadro === '') {
-    alert('Board inválido!');
-  } else if (novoQuadro < 5) {
-    novoQuadro = 5;
-  }
-  if (novoQuadro > 50) {
-    novoQuadro = 50;
-  }
+    if (newBoard === '' || newBoard < 1) {
+      alert('Board inválido!');
+    }
+    if (newBoard > 40) {
+      newBoard = 40;
+    }
 
-  createPixels(novoQuadro);
-});
+    createPixels(newBoard);
+    clearPixel()
+  });
+};
+newPixelBoard();
+
+const inputDescription = () => {
+  inputWrapper.addEventListener('mouseenter', () => {
+    hoverDescription.style.display = 'block';
+  });
+
+  inputWrapper.addEventListener('mouseleave', () => {
+    hoverDescription.style.display = 'none';
+  });
+};
+inputDescription();
+
+const generateNewColors = () => {
+  refreshColorsBtn.addEventListener('click', () => {
+    createPallete();
+  });
+};
+generateNewColors();
