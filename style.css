@@ -16,7 +16,7 @@ border:0;
 
 #title {
   background-color: purple;
-  padding: 1%;
+  padding: 10px 1%;
   text-align: center ;
   border: 3px solid black;
   margin: 50px auto;
@@ -105,4 +105,8 @@ border:0;
 
 .input-wrapper:hover .descricao {
    display: block;
+}
+
+.border {
+  border: 4px solid black;
 }

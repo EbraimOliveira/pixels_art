@@ -20,6 +20,7 @@ createPallete();
 const selectBlackColor = () => {
   blackColorPalette.style.backgroundColor = 'black';
   blackColorPalette.classList.add('selected');
+  blackColorPalette.classList.add('border')
 };
 selectBlackColor();
 
@@ -39,6 +40,7 @@ const removeSelected = (color) => {
   Array.from(colorPalette).forEach((color2) => {
     if (color2 !== color && color2.classList.contains('selected')) {
       color2.classList.remove('selected');
+      color2.classList.remove('border')
     }
   });
 };
@@ -46,6 +48,7 @@ const removeSelected = (color) => {
 const addSelected = (color) => {
   if (!color.classList.contains('selected')) {
     color.classList.add('selected');
+    color.classList.add('border')
     removeSelected(color);
   }
 };
@@ -102,9 +105,11 @@ const newPixelBoard = () => {
 
     if (newBoard === '' || newBoard < 1) {
       alert('Board inválido!');
+      boardSize.value = ''
     }
     if (newBoard > 40) {
       newBoard = 40;
+      boardSize.value = 40
     }
 
     createPixels(newBoard);
