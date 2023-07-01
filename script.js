@@ -8,15 +8,42 @@ const boardSize = document.getElementById('board-size');
 const inputWrapper = document.querySelector('.input-wrapper');
 const hoverDescription = inputWrapper.querySelector('.description');
 const refreshColorsBtn = document.getElementById('refresh-colors');
+const previousColorsBtn = document.getElementById('previous-colors');
+
+
+let colorsHistory = [];
 
 const createPallete = () => {
+  colorsList = []
   Array.from(randomColorPalette).forEach((item) => {
     const newColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
     const color = item;
     color.style.backgroundColor = newColor;
+    colorsList.push(newColor)
   });
+
+  colorsHistory.push(colorsList)
+  if (colorsHistory.length > 1) {
+    previousColorsBtn.disabled = false
+  }
 };
 createPallete();
+
+const previousPallete = () => {
+  Array.from(randomColorPalette).forEach((item, index) => {
+    const currencyPallete = colorsHistory[colorsHistory.length - 1]
+    const currencyColor = currencyPallete[index]
+    item.style.backgroundColor = currencyColor
+  })
+  colorsHistory.splice(-1, 1)
+}
+
+const previousColors = () => {
+  previousColorsBtn.addEventListener('click', () => {
+    previousPallete();
+  })
+};
+previousColors();
 
 const selectBlackColor = () => {
   blackColorPalette.style.backgroundColor = 'black';
@@ -34,7 +61,7 @@ const createPixels = (n) => {
     pixelBoard.appendChild(pixels);
   }
 };
-createPixels(5);
+createPixels(10);
 
 const removeSelected = (color) => {
   Array.from(colorPalette).forEach((color2) => {
@@ -84,8 +111,8 @@ const hover = () => {
 };
 
 const applyColor = () => {
+  hover();
   pixelBoard.addEventListener('click', (e) => {
-    hover();
     const selectedColor = document.getElementsByClassName('selected')[0];
     if (e.target !== document.getElementById('pixel-board')) {
       e.target.style.backgroundColor = selectedColor.style.backgroundColor;
@@ -126,15 +153,15 @@ const newPixelBoard = () => {
     clearPixelBoard();
     let newBoard = boardSize.value;
 
-    if (newBoard === '' || newBoard < 1) {
-      alert('Board inválido!');
+    if (newBoard === '' || newBoard <= 0) {
+      alert('Invalid Board!');
+      newBoard = 10;
       boardSize.value = '';
     }
     if (newBoard > 40) {
       newBoard = 40;
       boardSize.value = 40;
     }
-
     createPixels(newBoard);
     clearPixel();
   });

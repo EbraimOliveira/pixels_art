@@ -50,6 +50,14 @@ border:0;
   width: 47px;
 }
 
+#previous-colors {
+  font-size: medium;
+  border: 1px solid black;
+  padding: 8px 18px 8px 18px;
+  margin-left: 14px;
+  border-radius: 5px;
+}
+
 #refresh-colors {
   font-size: medium;
   border: 1px solid black;
@@ -89,10 +97,6 @@ border:0;
   margin-right: 1px;
   margin-left: 1px;
   border: 1px solid black;
-}
-
-.black {
-  display: inline-block;
 }
 
 .description {
