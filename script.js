@@ -10,38 +10,41 @@ const hoverDescription = inputWrapper.querySelector('.description');
 const refreshColorsBtn = document.getElementById('refresh-colors');
 const previousColorsBtn = document.getElementById('previous-colors');
 
-
-let colorsHistory = [];
+const colorsHistory = [];
 
 const createPallete = () => {
-  colorsList = []
+  const colorsList = [];
   Array.from(randomColorPalette).forEach((item) => {
     const newColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
     const color = item;
     color.style.backgroundColor = newColor;
-    colorsList.push(newColor)
+    colorsList.push(newColor);
   });
 
-  colorsHistory.push(colorsList)
-  if (colorsHistory.length > 1) {
-    previousColorsBtn.disabled = false
+  if (colorsHistory.length > 0) {
+    previousColorsBtn.disabled = false;
   }
+  colorsHistory.push(colorsList);
 };
 createPallete();
 
 const previousPallete = () => {
   Array.from(randomColorPalette).forEach((item, index) => {
-    const currencyPallete = colorsHistory[colorsHistory.length - 1]
-    const currencyColor = currencyPallete[index]
-    item.style.backgroundColor = currencyColor
-  })
-  colorsHistory.splice(-1, 1)
-}
+    const currencyPallete = colorsHistory[colorsHistory.length - 2];
+    const currencyColor = currencyPallete[index];
+    const color = item;
+    color.style.backgroundColor = currencyColor;
+  });
+  colorsHistory.splice(-1, 1);
+  if (colorsHistory.length < 2) {
+    previousColorsBtn.disabled = true;
+  }
+};
 
 const previousColors = () => {
   previousColorsBtn.addEventListener('click', () => {
     previousPallete();
-  })
+  });
 };
 previousColors();
 
@@ -93,7 +96,6 @@ const hover = () => {
   let isMouseDown = false;
 
   document.addEventListener('mousedown', () => {
-    isMouseDown = true;
   });
 
   document.addEventListener('mouseup', () => {
