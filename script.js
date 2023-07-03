@@ -11,6 +11,19 @@ const refreshColorsBtn = document.getElementById('refresh-colors');
 const previousColorsBtn = document.getElementById('previous-colors');
 
 const colorsHistory = [];
+let isMouseDown = false;
+const MIN = 1;
+const MAX = 40;
+
+const mouseUpDown = () => {
+  document.addEventListener('mousedown', () => {
+    isMouseDown = true;
+  });
+  document.addEventListener('mouseup', () => {
+    isMouseDown = false;
+  });
+};
+mouseUpDown();
 
 const createPallete = () => {
   const colorsList = [];
@@ -55,6 +68,16 @@ const selectBlackColor = () => {
 };
 selectBlackColor();
 
+const clearPixel = () => {
+  const pixels = document.querySelectorAll('.pixel');
+  Array.from(pixels).forEach((pixel) => {
+    pixel.addEventListener('dblclick', (e) => {
+      e.target.style.backgroundColor = '#fff';
+    });
+  });
+};
+clearPixel();
+
 const createPixels = (n) => {
   for (let i = 0; i < n * n; i += 1) {
     const pixels = document.createElement('div');
@@ -63,6 +86,7 @@ const createPixels = (n) => {
     pixelBoard.style.width = `${boardWidth}px`;
     pixelBoard.appendChild(pixels);
   }
+  clearPixel();
 };
 createPixels(10);
 
@@ -92,16 +116,7 @@ const selectColor = () => {
 };
 selectColor();
 
-const hover = () => {
-  let isMouseDown = false;
-
-  document.addEventListener('mousedown', () => {
-  });
-
-  document.addEventListener('mouseup', () => {
-    isMouseDown = false;
-  });
-
+const applyColorByHover = () => {
   pixelBoard.addEventListener('mouseover', (e) => {
     if (isMouseDown) {
       const selectedColor = document.getElementsByClassName('selected')[0];
@@ -111,9 +126,9 @@ const hover = () => {
     }
   });
 };
+applyColorByHover();
 
-const applyColor = () => {
-  hover();
+const applyColorByClick = () => {
   pixelBoard.addEventListener('click', (e) => {
     const selectedColor = document.getElementsByClassName('selected')[0];
     if (e.target !== document.getElementById('pixel-board')) {
@@ -121,7 +136,7 @@ const applyColor = () => {
     }
   });
 };
-applyColor();
+applyColorByClick();
 
 const clearBoard = () => {
   clearButton.addEventListener('click', () => {
@@ -134,16 +149,6 @@ const clearBoard = () => {
 };
 clearBoard();
 
-const clearPixel = () => {
-  const pixels = document.querySelectorAll('.pixel');
-  Array.from(pixels).forEach((pixel) => {
-    pixel.addEventListener('dblclick', (e) => {
-      e.target.style.backgroundColor = '#fff';
-    });
-  });
-};
-clearPixel();
-
 const clearPixelBoard = () => {
   while (pixelBoard.hasChildNodes()) {
     pixelBoard.removeChild(pixelBoard.lastChild);
@@ -154,18 +159,20 @@ const newPixelBoard = () => {
   generateBoardBtn.addEventListener('click', () => {
     clearPixelBoard();
     let newBoard = boardSize.value;
-
-    if (newBoard === '' || newBoard <= 0) {
+    if (newBoard === '') {
       alert('Invalid Board!');
       newBoard = 10;
       boardSize.value = '';
     }
-    if (newBoard > 40) {
-      newBoard = 40;
-      boardSize.value = 40;
+    if (newBoard > MAX) {
+      newBoard = MAX;
+      boardSize.value = newBoard;
+    }
+    if (newBoard < MIN) {
+      newBoard = MIN;
+      boardSize.value = newBoard;
     }
     createPixels(newBoard);
-    clearPixel();
   });
 };
 newPixelBoard();
