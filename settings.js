@@ -1,16 +1,18 @@
 const settingsBtn = document.getElementById('settings');
 const optionsMenu = document.getElementById('options-menu');
 const exitBtn = document.getElementById('exit');
-const colorInput = document.getElementById('background-color');
+const colorLabel = document.getElementById('background-color');
 const body = document.getElementById('body');
 const title = document.getElementById('title');
 const generateBoard = document.getElementById('generate-board');
-const languageSelect = document.getElementById('language');
-const englishOption = document.querySelector('#english');
-const portugueseOption = document.querySelector('#portuguese');
+const languageSelect = document.getElementById('select');
+const languageText = document.getElementById('language-text');
+const portuguese = document.getElementById('portuguese');
+const english = document.getElementById('english');
+const backgroundColorText = document.getElementById('background-color-text');
 
 document.addEventListener('DOMContentLoaded', () => {
-  colorInput.value = '#f0f8ff';
+  colorLabel.value = '#f0f8ff';
 });
 
 const settings = () => {
@@ -21,7 +23,7 @@ const settings = () => {
 settings();
 
 const changeBackgroundColor = () => {
-  colorInput.addEventListener('change', (e) => {
+  colorLabel.addEventListener('change', (e) => {
     const selectedColor = e.target.value;
     body.style.backgroundColor = selectedColor;
   });
@@ -43,10 +45,12 @@ const ifEnglish = () => {
   clearButton.textContent = 'Clear';
   hoverDescription.textContent = 'Input a value between 1 and 40 to create a new board';
   settingsBtn.textContent = 'Settings';
-  languageSelect.textContent = 'Language';
-  englishOption.textContent = 'English';
-  portugueseOption.textContent = 'Portuguese';
-}
+  languageText.innerText = 'Language:';
+  portuguese.textContent = 'Portuguese'
+  english.textContent = 'English';
+  backgroundColorText.innerText = 'Background Color:';
+  exitBtn.textContent = 'Exit';
+};
 
 const ifPotuguese = () => {
   title.textContent = 'Paleta de Cores';
@@ -56,23 +60,21 @@ const ifPotuguese = () => {
   clearButton.textContent = 'Limpar';
   hoverDescription.textContent = 'Escolha um valor entre 1 e 40 para criar um novo tabuleiro';
   settingsBtn.textContent = 'Configurações';
-  languageSelect.textContent = 'Idioma:';
-  englishOption.textContent = 'Inglês';
-  portugueseOption.textContent = 'Português';
-  // colorInput.textContent = 'Cor de fundo';
+  languageText.innerText = 'Idioma:';
+  portuguese.textContent = 'Português';
+  english.textContent = 'Inglês';
+  backgroundColorText.innerText = 'Cor de Fundo:';
   exitBtn.textContent = 'Sair';
-}
+};
 
 const changeLanguage = () => {
-  languageSelect.addEventListener('change', () => {
-    if (englishOption.selected) {
+  languageSelect.addEventListener('change', (e) => {
+    if (e.target.value === 'english') {
       ifEnglish()
     }
-    if (portugueseOption.selected) {
+    if (e.target.value === 'portuguese') {
       ifPotuguese()
     }
   });
 };
-
 changeLanguage();
-

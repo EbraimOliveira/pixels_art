@@ -141,16 +141,8 @@ border:0;
   font-size: large;
 }
 
-#portuguese{
-  font-size: medium;
-}
-
-#english{
-  font-size: medium;
-}
-
 #exit {
-  font-size: medium;
+  font-size: larger;
   border: 1px solid black;
   padding: 8px 18px 8px 18px;
   margin-left: 14px;
@@ -160,7 +152,7 @@ border:0;
   bottom: 0;
   margin-right: 100px;
   margin-bottom: 100px;
-  animation: pulse 2s infinite;
+  animation: pulse 1s infinite;
 }
 
 @keyframes pulse {

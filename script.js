@@ -12,6 +12,7 @@ const previousColorsBtn = document.getElementById('previous-colors');
 
 const colorsHistory = [];
 let isMouseDown = false;
+let message = 'Invalid Value'
 const MIN = 1;
 const MAX = 40;
 
@@ -153,14 +154,22 @@ const clearPixelBoard = () => {
   while (pixelBoard.hasChildNodes()) {
     pixelBoard.removeChild(pixelBoard.lastChild);
   }
+  alertMessage();
 };
+
+const alertMessage = () => {
+  if (title.innerHTML === 'Paleta de Cores') {
+    message = 'Valor inválido'
+  }
+};
+alertMessage();
 
 const newPixelBoard = () => {
   generateBoardBtn.addEventListener('click', () => {
     clearPixelBoard();
     let newBoard = boardSize.value;
     if (newBoard === '') {
-      alert('Invalid Board!');
+      alert(message);
       newBoard = 10;
       boardSize.value = '';
     }
