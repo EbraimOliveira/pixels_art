@@ -10,8 +10,21 @@ border:0;
   background-color: aliceblue;
 }
 
+#settings {
+  font-size: medium;
+  border: 1px solid black;
+  padding: 8px 40px 8px 40px;
+  border-radius: 5px;
+  margin-top: 50px;
+  margin-right: 250px;
+  position: absolute;
+  right: 0;
+}
+
 #header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #title {
@@ -23,14 +36,17 @@ border:0;
   font-size: 50px;
   color: yellow;
   font-weight: bold;
+  border-radius: 10px;
 }
 
-#color-palette {
-  text-align: center;
+#color-palette {  
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -40%);
 }
 
 #menu {
-  padding: 50px 50px 30px 50px;
+  padding: 100px 50px 30px 50px;
   display: flex;
   justify-content: center;
 }
@@ -81,19 +97,82 @@ border:0;
   border-radius: 5px;
 }
 
-#footer {
+#options-menu {
   position: fixed;
-  bottom: 0;
+  z-index: 1;
+  display: none;
   width: 100%;
-  text-align: center;
+  background-color: aliceblue;
+  border: 1px solid black;
+  align-items: center;
+  height: 100%;
 }
 
-#settings {
+#options {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  flex-direction: column;
+}
+
+#background-color{
+  font-size: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#select-color{
+  width: 40px;
+  height: 30px;
+}
+
+#language {
+  font-size: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#select{
+  font-size: large;
+}
+
+#portuguese{
+  font-size: medium;
+}
+
+#english{
+  font-size: medium;
+}
+
+#exit {
   font-size: medium;
   border: 1px solid black;
-  padding: 8px 7px 8px 7px;
+  padding: 8px 18px 8px 18px;
+  margin-left: 14px;
   border-radius: 5px;
-  float: right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .color {

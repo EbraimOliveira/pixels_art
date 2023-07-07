@@ -6,8 +6,8 @@ const clearButton = document.getElementById('clear-board');
 const generateBoardBtn = document.getElementById('generate-board');
 const boardSize = document.getElementById('board-size');
 const inputWrapper = document.querySelector('.input-wrapper');
-const hoverDescription = inputWrapper.querySelector('.description');
 const refreshColorsBtn = document.getElementById('refresh-colors');
+const hoverDescription = inputWrapper.querySelector('.description');
 const previousColorsBtn = document.getElementById('previous-colors');
 
 const colorsHistory = [];
