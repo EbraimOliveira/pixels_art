@@ -1,3 +1,4 @@
+const body = document.getElementById('body');
 const colorPalette = document.getElementsByClassName('color');
 const blackColorPalette = document.getElementsByClassName('black')[0];
 const randomColorPalette = document.getElementsByClassName('cor-aleatoria');
@@ -97,6 +98,7 @@ const removeSelected = (color) => {
     if (color2 !== color && color2.classList.contains('selected')) {
       color2.classList.remove('selected');
       color2.classList.remove('border');
+      color2.classList.remove('border2');
     }
   });
 };
@@ -104,7 +106,9 @@ const removeSelected = (color) => {
 const addSelected = (color) => {
   if (!color.classList.contains('selected')) {
     color.classList.add('selected');
-    color.classList.add('border');
+    if (body.style.backgroundColor === 'rgb(0, 0, 0)') {
+      color.classList.add('border2');
+    } else { color.classList.add('border'); }
     removeSelected(color);
   }
 };

@@ -2,7 +2,6 @@ const settingsBtn = document.getElementById('settings');
 const optionsMenu = document.getElementById('options-menu');
 const exitBtn = document.getElementById('exit');
 const colorLabel = document.getElementById('background-color');
-const body = document.getElementById('body');
 const generateBoard = document.getElementById('generate-board');
 const languageSelect = document.getElementById('select');
 const languageText = document.getElementById('language-text');
@@ -25,6 +24,7 @@ const changeBackgroundColor = () => {
   colorLabel.addEventListener('change', (e) => {
     const selectedColor = e.target.value;
     body.style.backgroundColor = selectedColor;
+    console.log(body.style.backgroundColor);
   });
 };
 changeBackgroundColor();

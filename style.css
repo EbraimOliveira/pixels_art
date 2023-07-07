@@ -200,3 +200,7 @@ border:0;
 .border {
   border: 4px solid black;
 }
+
+.border2 {
+  border: 4px solid #fff;
+}
