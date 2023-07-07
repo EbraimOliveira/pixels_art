@@ -3,7 +3,6 @@ const optionsMenu = document.getElementById('options-menu');
 const exitBtn = document.getElementById('exit');
 const colorLabel = document.getElementById('background-color');
 const body = document.getElementById('body');
-const title = document.getElementById('title');
 const generateBoard = document.getElementById('generate-board');
 const languageSelect = document.getElementById('select');
 const languageText = document.getElementById('language-text');
@@ -32,7 +31,7 @@ changeBackgroundColor();
 
 const exit = () => {
   exitBtn.addEventListener('click', () => {
-    optionsMenu.style.display = 'none'
+    optionsMenu.style.display = 'none';
   });
 };
 exit();
@@ -46,7 +45,7 @@ const ifEnglish = () => {
   hoverDescription.textContent = 'Input a value between 1 and 40 to create a new board';
   settingsBtn.textContent = 'Settings';
   languageText.innerText = 'Language:';
-  portuguese.textContent = 'Portuguese'
+  portuguese.textContent = 'Portuguese';
   english.textContent = 'English';
   backgroundColorText.innerText = 'Background Color:';
   exitBtn.textContent = 'Exit';
@@ -70,10 +69,10 @@ const ifPotuguese = () => {
 const changeLanguage = () => {
   languageSelect.addEventListener('change', (e) => {
     if (e.target.value === 'english') {
-      ifEnglish()
+      ifEnglish();
     }
     if (e.target.value === 'portuguese') {
-      ifPotuguese()
+      ifPotuguese();
     }
   });
 };

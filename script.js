@@ -9,10 +9,11 @@ const inputWrapper = document.querySelector('.input-wrapper');
 const refreshColorsBtn = document.getElementById('refresh-colors');
 const hoverDescription = inputWrapper.querySelector('.description');
 const previousColorsBtn = document.getElementById('previous-colors');
+const title = document.getElementById('title');
 
 const colorsHistory = [];
 let isMouseDown = false;
-let message = 'Invalid Value'
+let message = 'Invalid Value';
 const MIN = 1;
 const MAX = 40;
 
@@ -150,19 +151,19 @@ const clearBoard = () => {
 };
 clearBoard();
 
+const alertMessage = () => {
+  if (title.innerHTML === 'Paleta de Cores') {
+    message = 'Valor inválido';
+  }
+};
+alertMessage();
+
 const clearPixelBoard = () => {
   while (pixelBoard.hasChildNodes()) {
     pixelBoard.removeChild(pixelBoard.lastChild);
   }
   alertMessage();
 };
-
-const alertMessage = () => {
-  if (title.innerHTML === 'Paleta de Cores') {
-    message = 'Valor inválido'
-  }
-};
-alertMessage();
 
 const newPixelBoard = () => {
   generateBoardBtn.addEventListener('click', () => {
